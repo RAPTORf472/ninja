@@ -1,0 +1,11 @@
+name: Ninja
+main: me.raptor.ninja.Ninja
+version: 4.0
+author: RAPTOR
+description: An awesome plugin!
+api-version: 1.13
+
+commands:
+    ninja:
+      usage: /<command>
+      description: open locate menu
