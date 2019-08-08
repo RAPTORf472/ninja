@@ -31,8 +31,8 @@ public class Blink implements Listener{
 		}
 		EquipmentSlot hand = e.getHand();
 		if (!hand.equals(EquipmentSlot.HAND)) return;
-
-		PlayerInventory pi = e.getPlayer().getInventory();
+Player p = e.getPlayer();
+		PlayerInventory pi = p.getInventory();
 		if (pi.getChestplate() == null || pi.getChestplate().getItemMeta() == null || pi.getChestplate().getItemMeta().getDisplayName() == null) return;
 		if (pi.getChestplate().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lArrowproof Chestplate")) {
 			if (pi.getLeggings() == null || pi.getLeggings().getItemMeta() == null || pi.getLeggings().getItemMeta().getDisplayName() == null) return;
@@ -41,12 +41,16 @@ public class Blink implements Listener{
 				if (pi.getHelmet().getItemMeta().getDisplayName().equals("§c§lIron Visor")) {
 					if (pi.getBoots() == null || pi.getBoots().getItemMeta() == null || pi.getBoots().getItemMeta().getDisplayName() == null) return;
 					if (pi.getBoots().getItemMeta().getDisplayName().equals("§c§l'Sneak'ers")) {
+						if (!p.hasPermission("ninja.blink")) {
+							p.sendMessage(prefix() + "You don't have permission to use Blink!");
+							return;
+						}
 		Player p1 = (Player) e.getRightClicked();
 		Cooldown.setCooldown(e.getPlayer(), "Blink", 60);
 		e.getPlayer().sendMessage(prefix() +  p1.getName() + " has been blinked");
 		p1.sendMessage(prefix() + "You has been blinked");
 		p1.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 15, 4), true);
-		p1.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 5, 0), true);
+		p1.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 10, 1), true);
 		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			public void run() {
 				p1.sendMessage(prefix() + "Blink's over");

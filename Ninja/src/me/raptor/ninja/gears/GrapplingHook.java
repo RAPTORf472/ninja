@@ -76,7 +76,7 @@ hook.add(p.getName());
 		if (a.getItemMeta().getDisplayName().equals("§c§lSteel Hook")) {
 
 		   Vector v = (p.getLocation().toVector()).subtract(loc.toVector());
-		   p.setVelocity(v.multiply(-0.375).setY(v.getY() / 1.5 + 0.25));
+		   p.setVelocity(v.multiply(-0.25).setY(v.getY() / 1.5 + 0.25));
 		   hook.remove(p.getName());
 	}
 		}

@@ -52,7 +52,10 @@ public class Assault implements Listener{
 						if (pi.getBoots().getItemMeta().getDisplayName().equals("§c§l'Sneak'ers")) {
 				if (pi.getItemInMainHand() == null || pi.getItemInMainHand().getItemMeta() == null || pi.getItemInMainHand().getItemMeta().getDisplayName() == null) return;
 				if (pi.getItemInMainHand().getItemMeta().getDisplayName().equals("§c§lKeen Katana")) {
-
+				if (!p.hasPermission("ninja.assault")) {
+					p.sendMessage(prefix() + "You don't have permission to use Assault!");
+					return;
+				}
 				
 					tar.clear();
 					ent.clear();
@@ -80,7 +83,7 @@ public class Assault implements Listener{
 				public void run() {
 					if (dam.contains(p.getName())) {
 						dam.remove(p.getName());
-	                    p.sendMessage(prefix() + "Critical hit expired!");
+	                    p.sendMessage(prefix() + "Backstab expired!");
 	                    return;
 					}
 				}
@@ -156,7 +159,7 @@ public class Assault implements Listener{
 		Player p = (Player) e.getDamager();
 		if (dam.contains(p.getName())) {
 			e.setDamage(e.getDamage() * 3);
-			p.sendMessage(prefix() + "Critical!");
+			p.sendMessage(prefix() + "Backstabed!");
 			dam.remove(p.getName());
 
 		}

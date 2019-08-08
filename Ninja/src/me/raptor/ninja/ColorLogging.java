@@ -37,6 +37,7 @@ public static String getNinjaGear() {
     builder.append("&7/&cninja katana&f&l - Give you a &c&lKeen Katana.\n");
     builder.append("&7/&cninja bow&f&l - Give you a &c&lSensei's Bow.\n");
     builder.append("&7/&cninja hook&f&l - Give you a &c&lSteel Hook.\n");
+    builder.append("&7/&cninja set&f&l - Give you a ninja set.\n");
     builder.append("&7&l-----------------------------------------------------\n");
    
    

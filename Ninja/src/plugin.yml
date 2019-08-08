@@ -1,11 +1,102 @@
 name: Ninja
 main: me.raptor.ninja.Ninja
-version: 4.0
+version: 0.1
 author: RAPTOR
-description: An awesome plugin!
+description: A plugin that makes you a ninja!
 api-version: 1.13
 
 commands:
     ninja:
       usage: /<command>
-      description: open locate menu
+      description: Get help message
+      
+permission:
+    ninja.*:
+      description: Gives access to all Ninja commands.
+      default: op
+      children:
+           ninja.gears: true
+           ninja.abilities: true
+           
+           
+    ninja.gears:
+      description: Allow players to get Ninja's gears from commands or not
+      children:
+           ninja.set: true
+           ninja.visor: true
+           ninja.chestplate: true
+           ninja.leggings: true
+           ninja.sneakers: true
+           ninja.katana: true
+           ninja.bow: true
+           ninja.hook: true
+           
+    ninja.abilities:
+      description: Allow players to use Ninja's abilities or not
+      children:
+           ninja.smokebomb: true
+           ninja.assault: true
+           ninja.deadshot: true
+           ninja.blink: true
+           
+    ninja.commands:
+      description: Allow players to use the plugin's command or not
+      children:
+           ninja.help: true
+           ninja.seegears: true
+           ninja.seeabilities: true
+           
+    ninja.set:
+      description: Allow players to get Ninja's set from commands or not
+           
+           
+    ninja.visor:
+      description: Allow players to get Ninja's Visors from commands or not
+      
+                 
+    ninja.chestplate:
+      description: Allow players to get Ninja's Chestplate from commands or not
+      
+       
+    ninja.leggings:
+      description: Allow players to get Ninja's Leggings from commands or not
+      
+                 
+    ninja.sneakers:
+      description: Allow players to get Ninja's Sneakers from commands or not           
+           
+    ninja.katana:
+      description: Allow players to get Ninja's Katana from commands or not
+      
+                 
+    ninja.bow:
+      description: Allow players to get Ninja's Bow from commands or not
+      
+       
+    ninja.hook:
+      description: Allow players to get Ninja's Hook from commands or not
+      
+                 
+    ninja.smokebomb:
+      description: Allow players to use Smokebomb or not           
+           
+    ninja.assault:
+      description: Allow players to use Assault or not           
+      
+                 
+    ninja.deadshot:
+      description: Allow players to use DeadShot or not           
+      
+       
+    ninja.blink:
+      description: Allow players to use Blink or not           
+      
+    ninja.seegears:
+      description: Allow players to see Ninja's gears via commands   
+      
+    ninja.help:
+      description: Allow players to see the plugin's help message
+      
+    ninja.seeabilities:
+      description: Allow players to see Ninja's abilities via commands              
+      

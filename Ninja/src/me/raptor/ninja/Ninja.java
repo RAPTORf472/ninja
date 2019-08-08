@@ -37,11 +37,11 @@ public class Ninja extends JavaPlugin  {
 		new GrapplingHook(this);
 		new DeadShot(this);
 		new Blink(this);
+		m = new Abilities(this);
 		ColorLogging.logging(" &cNinja plugin has been enabled!");
 		ColorLogging.logging(" &cUnstable Version: 1.0");
 		ColorLogging.logging(" &cAuthor: &6RAPTOR");
 		ColorLogging.logging(" &cOnly work on 1.13 and above!");
-        m = new Abilities(this);
 
 	}
 	public boolean onCommand(CommandSender sd, Command cmd, String CommandLabel, String[] args) {
@@ -51,20 +51,44 @@ public class Ninja extends JavaPlugin  {
 		}
 		Player p = (Player) sd;
 		PlayerInventory pi = p.getInventory();
-		if (cmd.getName().equalsIgnoreCase("ninja")) {
+		if (cmd.getName().equalsIgnoreCase("ninja")) { 
+			if (!p.hasPermission("ninja.commands")) {
+				p.sendMessage(prefix() + "You don't have permission to use this command!");
+				return true;
+			}
 			if (args.length == 0) {
 				sd.sendMessage(ColorLogging.getHelpMessage());
 				return true;
 			}
+			if (args[0].equalsIgnoreCase("help")) {
+				if (!p.hasPermission("ninja.help")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
+				p.sendMessage(ColorLogging.getHelpMessage());
+				return true;
+			}
 			if (args[0].equalsIgnoreCase("gears")) {
+				if (!p.hasPermission("ninja.seegears")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				p.sendMessage(ColorLogging.getNinjaGear());
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("abilities")) {
+				if (!p.hasPermission("ninja.abilities")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				m.openMenu(p);
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("chestplate")) {
+				if (!p.hasPermission("ninja.chestplate")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				ItemStack aa = new ArrowproofChestplate();
 				if (pi.getChestplate() == null) {
 					pi.setChestplate(aa);
@@ -76,18 +100,30 @@ public class Ninja extends JavaPlugin  {
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("bow")) {
+				if (!p.hasPermission("ninja.bow")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				ItemStack aa = new SenseisBow();
 				pi.addItem(aa);
 				sd.sendMessage(prefix()+ "Here's your bow!");
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("hook")) {
+				if (!p.hasPermission("ninja.hook")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				ItemStack aa = new GrapplingHook();
 				pi.addItem(aa);
 				sd.sendMessage(prefix()+ "Here's your hook!");
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("leggings")) {
+				if (!p.hasPermission("ninja.leggings")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				ItemStack aa = new FineLeggings();
 				if (pi.getLeggings() == null) {
 					pi.setLeggings(aa);
@@ -95,10 +131,14 @@ public class Ninja extends JavaPlugin  {
 					return true;
 				}
 				pi.addItem(aa);
-				sd.sendMessage(prefix() + "Here's your leggigns!");
+				sd.sendMessage(prefix() + "Here's your leggings!");
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("sneakers")) {
+				if (!p.hasPermission("ninja.sneakers")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				ItemStack aa = new Sneakers();
 				if (pi.getBoots() == null) {
 					pi.setBoots(aa);
@@ -110,12 +150,20 @@ public class Ninja extends JavaPlugin  {
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("katana")) {
+				if (!p.hasPermission("ninja.katana")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				ItemStack aa = new Katana();
 				pi.addItem(aa);
 				sd.sendMessage(prefix() + "Here's your katana!");
 				return true;
 			} 
 			if (args[0].equalsIgnoreCase("visor")) {
+				if (!p.hasPermission("ninja.visor")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				ItemStack aa = new IronVisor();
 				if (pi.getHelmet() == null) {
 					pi.setHelmet(aa);
@@ -127,6 +175,10 @@ public class Ninja extends JavaPlugin  {
 				return true;
 			} 
 			if (args[0].equalsIgnoreCase("set")) {
+				if (!p.hasPermission("ninja.set")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				ItemStack a = new Katana();
 				ItemStack b = new IronVisor();
 				ItemStack c = new Sneakers();
@@ -141,10 +193,10 @@ public class Ninja extends JavaPlugin  {
 				fish.setItemMeta(fm);
 				if (pi.getBoots() == null) {
 					pi.setBoots(c);
-				} else 	pi.addItem(c);
+				} pi.addItem(c);
 				if (pi.getChestplate() == null) {
 					pi.setChestplate(d);
-				} else	pi.addItem(d);
+				} pi.addItem(d);
 				if (pi.getHelmet() == null) {
 					pi.setHelmet(b);
 				}
@@ -159,6 +211,10 @@ public class Ninja extends JavaPlugin  {
 				p.sendMessage(prefix()+ "Here's your set");
 				return true;
 			} else { 
+				if (!p.hasPermission("ninja.help")) {
+					p.sendMessage(prefix() + "You don't have permission to use this command!");
+					return true;
+				}
 				p.sendMessage(ColorLogging.getHelpMessage());
 				return true;
 				

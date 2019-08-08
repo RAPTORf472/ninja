@@ -55,7 +55,10 @@ public class Smokebomb implements Listener {
 					if (pi.getHelmet().getItemMeta().getDisplayName().equals("§c§lIron Visor")) {
 						if (pi.getBoots() == null || pi.getBoots().getItemMeta() == null || pi.getBoots().getItemMeta().getDisplayName() == null) return;
 						if (pi.getBoots().getItemMeta().getDisplayName().equals("§c§l'Sneak'ers")) {
-		
+							if (!p.hasPermission("ninja.smokebomb")) {
+								p.sendMessage(prefix() + "You don't have permission to use Smokebomb!");
+								return;
+							}
 			p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * 15, 1), true);
 			p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 15, 2), true);
 			p.sendMessage(prefix() + "Smokebomb!");

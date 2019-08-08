@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -22,7 +23,7 @@ import net.md_5.bungee.api.ChatColor;
 public class Abilities implements Listener{
 	Inventory inv, inv2, inv3, helm, katm, arrm, legm, hoom, snem, bowm;
 	ItemStack ful, kat, hel, arr, bow, leg, sne, hoo, gea, back;
-	ItemStack inte, sha, ken, mas, dra, arp, con, dou, eag, aqu, miz, cur, fis, ref, clo;
+	ItemStack inte, sha, ken, mas, dra, arp, con, dou, eag, aqu, miz, cur, fis, ref, clo, crit;
 	ItemStack ass, smo, bli, dea;
 	String name;
 public Abilities(Plugin p) {
@@ -76,6 +77,8 @@ public Abilities(Plugin p) {
 	fis = createItem(ChatColor.RED + "The Way Of The Fish", Material.COD, Arrays.asList(ChatColor.GRAY + "" + ChatColor.BOLD + "You can swim faster underwater"));	
 	ref = createItem(ChatColor.RED + "Super Reflexe", Material.CHORUS_FRUIT, Arrays.asList(ChatColor.GRAY + "" + ChatColor.BOLD + "Has a 15% chance of dodge or block to receive ",
 			ChatColor.GRAY + "" + ChatColor.BOLD + "only halves of the damage"));	
+	crit = createItem(ChatColor.RED + "Sharpened Blade", Material.ANVIL, Arrays.asList(ChatColor.GRAY + "" + ChatColor.BOLD + "Has a 50% chance of dealing a critical hit ",
+			ChatColor.GRAY + "" + ChatColor.BOLD + "that does 150% damage"));	
 	/*
 	 ...
 	 */
@@ -105,7 +108,7 @@ public Abilities(Plugin p) {
 	bli = createItem(ChatColor.RED + "Blink", Material.ARROW, Arrays.asList(
 			ChatColor.GRAY + "" + ChatColor.BOLD + "A instrinsic ability",
 			ChatColor.GRAY + "" + ChatColor.BOLD + "Right click your enemies to make them nausea",
-			ChatColor.GRAY + "" + ChatColor.BOLD + "for 15 seconds and blind for 5 seconds",
+			ChatColor.GRAY + "" + ChatColor.BOLD + "for 15 seconds and blind for 10 seconds",
 			ChatColor.GRAY + "" + ChatColor.BOLD + "60 seconds cooldowns",
 			ChatColor.GOLD + "" + ChatColor.BOLD + "Set Exclusive"));	
 	inv.setItem(11, ful);
@@ -142,6 +145,7 @@ for (int i = 0; i < 27; i++) {
 	helm.setItem(i, back);
 }
 katm.setItem(11, ken);
+katm.setItem(15, crit);
 for (int i = 0; i < 27; i++) {
 	if (katm.getItem(i) != null) continue;
 	katm.setItem(i, back);
@@ -281,34 +285,108 @@ for (int i = 0; i < 27; i++) {
 
 	}
 	@EventHandler
-	public void onMenuInteract3(InventoryClickEvent e) {
+public void onMenuInteract5(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
-		if (p.getOpenInventory().getTitle().equals("Iron Visor's Abilities") ||
-				p.getOpenInventory().getTitle().equals("Keen Katana's Abilities") ||
-				p.getOpenInventory().getTitle().equals("Fine Leggings Abilities") ||
-				p.getOpenInventory().getTitle().equals("'Sneak'ers Abilities") ||
-				p.getOpenInventory().getTitle().equals("Sensei's Bow Abilities") ||
-				p.getOpenInventory().getTitle().equals("Steel Hook Abilities") ||
-				p.getOpenInventory().getTitle().equals("Arrowproof Chestplate Abilities")
-				) return;
-		if  (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
+		if (!p.getOpenInventory().getTitle().contains("Keen Katana's Abilities")) return;
 		e.setCancelled(true);
+		if  (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
 		if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
 			e.setCancelled(true);
-			p.closeInventory();
-			p.openInventory(inv2);
+p.closeInventory();
+p.openInventory(inv);
+		}
+	}
+	@EventHandler
+public void onMenuInteract6(InventoryClickEvent e) {
+		Player p = (Player) e.getWhoClicked();
+		if (!p.getOpenInventory().getTitle().contains("Sensei's Bow's Abilities")) return;
+		e.setCancelled(true);
+		if  (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
+		if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
+			e.setCancelled(true);
+p.closeInventory();
+p.openInventory(inv);
+		}
+	}
+	@EventHandler
+public void onMenuInteract7(InventoryClickEvent e) {
+		Player p = (Player) e.getWhoClicked();
+		if (!p.getOpenInventory().getTitle().contains("Steel Hook's Abilities")) return;
+		e.setCancelled(true);
+		if  (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
+		if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
+			e.setCancelled(true);
+p.closeInventory();
+p.openInventory(inv);
+		}
+	}
+	@EventHandler
+public void onMenuInteract8(InventoryClickEvent e) {
+		Player p = (Player) e.getWhoClicked();
+		if (!p.getOpenInventory().getTitle().contains("Iron Visor's Abilities")) return;
+		e.setCancelled(true);
+		if  (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
+		if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
+			e.setCancelled(true);
+p.closeInventory();
+p.openInventory(inv);
+		}
+	}	@EventHandler
+public void onMenuInteract9(InventoryClickEvent e) {
+		Player p = (Player) e.getWhoClicked();
+		if (!p.getOpenInventory().getTitle().contains("Arrowproof Chestplate's Abilities")) return;
+		e.setCancelled(true);
+		if  (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
+		if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
+			e.setCancelled(true);
+p.closeInventory();
+p.openInventory(inv);
+		}
+	}
+	@EventHandler
+public void onMenuInteract10(InventoryClickEvent e) {
+		Player p = (Player) e.getWhoClicked();
+		if (!p.getOpenInventory().getTitle().contains("Fine Leggings's Abilities")) return;
+		e.setCancelled(true);
+		if  (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
+		if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
+			e.setCancelled(true);
+p.closeInventory();
+p.openInventory(inv);
+		}
+	}
+	@EventHandler
+public void onMenuInteract11(InventoryClickEvent e) {
+		Player p = (Player) e.getWhoClicked();
+		if (!p.getOpenInventory().getTitle().contains("'Sneak'ers's Abilities")) return;
+		e.setCancelled(true);
+		if  (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
+		if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
+			e.setCancelled(true);
+p.closeInventory();
+p.openInventory(inv);
 		}
 	}
 	@EventHandler
 	public void onMenuInteract4(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
-		if (!p.getOpenInventory().getTitle().equals("Set's Abilities")) return;
+		if (!p.getOpenInventory().getTitle().contains("Set's Abilities")) return;
 		if  (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) return;
 		e.setCancelled(true);
 		if (e.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
 			e.setCancelled(true);
 p.closeInventory();
 p.openInventory(inv);
+		}
+	}
+	@EventHandler
+	public void onNinjaEatFish(PlayerItemConsumeEvent e) {
+		if (e.getItem().getType() != Material.COOKED_COD) return;
+		ItemStack mac = e.getItem();
+		if (mac.getItemMeta() == null || mac.getItemMeta().getDisplayName() == null) return;
+		if (mac.getItemMeta().getDisplayName().equals("§6Mackarel")) {
+			e.getPlayer().setFoodLevel(20);
+			e.getPlayer().setSaturation(20);
 		}
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
@@ -33,7 +34,8 @@ public class Katana extends ItemStack implements Listener{
 		im.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "Keen Katana");
 		im.setLore(Arrays.asList(ChatColor.RED + "An epic item of an epic set!",
 				ChatColor.RED + "" + ChatColor.BOLD + "Made of unbreakable steel",
-				ChatColor.GOLD + "" + ChatColor.BOLD + "SPECIAL: Multihit: " + ChatColor.GRAY + "Has a 20% of performing a combo of hits"));
+				ChatColor.RED + "" + ChatColor.BOLD + "Has a 50% of dealing a critical hit which deals 150% damage",
+				ChatColor.GOLD + "" + ChatColor.BOLD + "SPECIAL: Kenjutsu: " + ChatColor.GRAY + "Has a 20% of performing a combo of hits"));
 	    im.setUnbreakable(true);
 	    im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 	    im.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
@@ -88,4 +90,23 @@ p.sendMessage(prefix() + "Combo!");
 	}
 
 }
+	@EventHandler
+	public void onNinjaAttack2(EntityDamageByEntityEvent e) {
+		if (!(e.getDamager() instanceof Player)) return;
+
+		Player p = (Player) e.getDamager();
+		PlayerInventory pi = p.getInventory();
+		if (pi.getItemInMainHand() == null || pi.getItemInMainHand().getType() != Material.IRON_SWORD) return;
+
+		ItemStack sword = pi.getItemInMainHand();
+		if (sword.getItemMeta() == null || sword.getItemMeta().getDisplayName() == null) return;
+		if (sword.getItemMeta().getDisplayName().equals("§c§lKeen Katana")) {
+			Random r = new Random();
+			int crit = r.nextInt(100);
+			if (20 < crit && crit < 70) return;
+			e.setDamage(e.getDamage() * 1.5);
+			e.getEntity().getWorld().spawnParticle(Particle.CRIT, e.getEntity().getLocation().getX(), e.getEntity().getLocation().getY(),  e.getEntity().getLocation().getZ(), 100, 0, 0, 0);
+			p.sendMessage(prefix() + "Critical Hit!");
+		}
+	}
 }

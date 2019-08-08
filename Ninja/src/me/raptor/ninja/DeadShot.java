@@ -58,6 +58,10 @@ public class DeadShot implements Listener{
 					if (pi.getHelmet().getItemMeta().getDisplayName().equals("§c§lIron Visor")) {
 						if (pi.getBoots() == null || pi.getBoots().getItemMeta() == null || pi.getBoots().getItemMeta().getDisplayName() == null) return;
 						if (pi.getBoots().getItemMeta().getDisplayName().equals("§c§l'Sneak'ers")) {
+							if (!p.hasPermission("ninja.deadshot")) {
+								p.sendMessage(prefix() + "You don't have permission to use DeadShot!");
+								return;
+							}
 							for (int i = -2; i < 3; i++) {
 								l.setYaw(p.getLocation().getYaw() + i * 8);
 								p.launchProjectile(Arrow.class).setVelocity(l.getDirection().multiply(5));
